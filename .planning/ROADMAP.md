@@ -4,9 +4,9 @@
 
 | Phase | Name | Status | Plans |
 |-------|------|--------|-------|
-| 1 | Infrastructure & Setup | Not Started | 2 |
-| 2 | Data Layer | Not Started | 1 |
-| 3 | Homepage & Tracks | Not Started | TBD |
+| 1 | Infrastructure & Setup | Complete | 2 |
+| 2 | Data Layer | Complete | 1 |
+| 3 | Homepage & Tracks | Complete | 2 |
 | 4 | Lesson & Ticket Pages | Not Started | TBD |
 | 5 | Polish & Verification | Not Started | TBD |
 

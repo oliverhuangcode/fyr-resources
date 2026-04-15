@@ -2,14 +2,14 @@
 
 ## Current Position
 
-- **Phase**: 3 of 5 (Homepage & Tracks)
-- **Plan**: 02 (not started)
+- **Phase**: 4 of 5 (Lesson & Ticket Pages)
+- **Plan**: 01 (not started — needs generation)
 - **Status**: In Progress
-- **Progress**: [███████░░░] 70%
+- **Progress**: [████████░░] 80%
 
 ## Performance Metrics
 
-- Plans completed: 4
+- Plans completed: 5
 - Average duration: N/A
 - Total execution time: 0
 
@@ -19,9 +19,15 @@
 - Deferred issues: None
 - Blockers: None
 
-## Phase 3 In Progress
+## Phase 3 Complete
 
-- Plan 01 complete: TrackCard, homepage, all-tracks page — build passes
+- components/TrackCard.tsx — server component, track card with icon/title/description/counts
+- app/page.tsx — hero + track grid
+- app/tracks/page.tsx — all tracks grid
+- components/ProgressBar.tsx — lesson progress bar
+- components/LessonCard.tsx — lesson card with locked/complete states
+- components/LessonList.tsx — client component, wraps useProgress
+- app/tracks/[trackId]/page.tsx — track detail with generateStaticParams
 
 ## Phase 2 Complete
 
@@ -32,5 +38,5 @@
 
 ## Session
 
-- Last activity: 2026-04-15 — Plan 03-01 complete: TrackCard + homepage + all-tracks, build passes
+- Last activity: 2026-04-15 — Phase 3 complete: all browse screens, build passes (6 static pages)
 - Mode: Autonomous (Ralph loop)
