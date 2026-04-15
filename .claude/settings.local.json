@@ -1,14 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm *)",
-      "Bash(npx *)",
-      "Bash(node *)",
-      "Bash(git *)",
-      "Bash(gh *)",
-      "Bash(tsc *)",
-      "Skill(*)",
-      "mcp__plugin_everything-claude-code_context7__*"
+      "Bash(git -C /Users/oliver/repos/fyr-resources log --oneline -10)",
+      "Bash(wait)",
+      "Bash(ls -lt /Users/oliver/repos/fyr-resources/.ralph/logs/claude_output_*.log)",
+      "Bash(ralph *)",
+      "Bash(npx tsc *)"
     ]
   }
 }

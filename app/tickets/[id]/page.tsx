@@ -16,11 +16,12 @@ const DIFFICULTY_BADGE: Record<Ticket['difficulty'], string> = {
 }
 
 interface TicketPageProps {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
-export default function TicketPage({ params }: TicketPageProps) {
-  const ticket = tickets.find(t => t.id === params.id)
+export default async function TicketPage({ params }: TicketPageProps) {
+  const { id } = await params
+  const ticket = tickets.find(t => t.id === id)
   if (!ticket) notFound()
 
   const track = tracks.find(t => t.id === ticket.trackId)

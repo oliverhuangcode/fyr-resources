@@ -4,25 +4,44 @@ export interface Resource {
   type: 'video' | 'reading' | 'interactive'
 }
 
+export interface LessonSection {
+  type: 'text' | 'code' | 'note'
+  heading?: string
+  body: string
+  language?: string
+}
+
+export interface SelfCheckPrompt {
+  question: string
+  answer: string
+}
+
+export interface CourseResource {
+  title: string
+  url: string
+  description: string
+}
+
 export interface Lesson {
   id: string
   trackId: string
   stage: number
   title: string
-  duration: string
   description: string
   skills: string[]
+  content: LessonSection[]
   resources: Resource[]
-  checkpoint: string
+  selfCheck: SelfCheckPrompt[]
 }
 
 export interface Track {
   id: string
   title: string
   description: string
-  icon: string          // emoji or short string
-  lessons: string[]     // ordered lesson IDs
-  tickets: string[]     // ticket IDs
+  icon: string
+  lessons: string[]
+  tickets: string[]
+  courseResources: CourseResource[]
 }
 
 export interface Ticket {

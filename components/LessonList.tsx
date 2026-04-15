@@ -10,7 +10,7 @@ interface LessonListProps {
 }
 
 export function LessonList({ lessons }: LessonListProps) {
-  const { isLessonUnlocked, isLessonCompleted, hydrated } = useProgress()
+  const { isLessonCompleted, hydrated } = useProgress()
 
   const completedCount = lessons.filter(l => isLessonCompleted(l.id)).length
 
@@ -37,7 +37,6 @@ export function LessonList({ lessons }: LessonListProps) {
           <LessonCard
             key={lesson.id}
             lesson={lesson}
-            isUnlocked={isLessonUnlocked(lesson.id)}
             isCompleted={isLessonCompleted(lesson.id)}
           />
         ))}
