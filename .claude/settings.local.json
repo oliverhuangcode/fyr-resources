@@ -5,7 +5,8 @@
       "Bash(wait)",
       "Bash(ls -lt /Users/oliver/repos/fyr-resources/.ralph/logs/claude_output_*.log)",
       "Bash(ralph *)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Bash(npm i *)"
     ]
   }
 }
