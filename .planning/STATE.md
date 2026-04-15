@@ -2,14 +2,14 @@
 
 ## Current Position
 
-- **Phase**: 4 of 5 (Lesson & Ticket Pages)
-- **Plan**: 02 (not started)
+- **Phase**: 5 of 5 (Polish & Verification)
+- **Plan**: 01 (not started — needs generation)
 - **Status**: In Progress
-- **Progress**: [████████░░] 80%
+- **Progress**: [█████████░] 90%
 
 ## Performance Metrics
 
-- Plans completed: 5
+- Plans completed: 7
 - Average duration: N/A
 - Total execution time: 0
 
@@ -18,6 +18,15 @@
 - Decisions: See PROJECT.md
 - Deferred issues: None
 - Blockers: None
+
+## Phase 4 Complete
+
+- components/ResourceLink.tsx — server-compatible, type badge + external link
+- components/MarkLessonComplete.tsx — client, hydration-guarded mark complete button
+- app/lessons/[id]/page.tsx — full lesson view, generateStaticParams (5 routes)
+- components/TicketCard.tsx — server-compatible, difficulty badge
+- components/MarkTicketComplete.tsx — client, mark complete for tickets
+- app/tickets/[id]/page.tsx — full ticket view, generateStaticParams (1 route)
 
 ## Phase 3 Complete
 
@@ -38,5 +47,5 @@
 
 ## Session
 
-- Last activity: 2026-04-15 — Phase 3 complete: all browse screens, build passes (6 static pages)
+- Last activity: 2026-04-15 — Phase 4 complete: lesson + ticket detail pages, build passes (12 static pages)
 - Mode: Autonomous (Ralph loop)
