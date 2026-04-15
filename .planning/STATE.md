@@ -3,7 +3,7 @@
 ## Current Position
 
 - **Phase**: 4 of 5 (Lesson & Ticket Pages)
-- **Plan**: 01 (not started — needs generation)
+- **Plan**: 02 (not started)
 - **Status**: In Progress
 - **Progress**: [████████░░] 80%
 

@@ -3,7 +3,7 @@ import { tracks } from '@/data/tracks'
 import { lessons } from '@/data/lessons'
 import { tickets } from '@/data/tickets'
 import { LessonList } from '@/components/LessonList'
-import Link from 'next/link'
+import { TicketCard } from '@/components/TicketCard'
 
 export function generateStaticParams() {
   return tracks.map(t => ({ trackId: t.id }))
@@ -40,27 +40,8 @@ export default function TrackPage({ params }: TrackPageProps) {
           <div className="space-y-3">
             {track.tickets.map(ticketId => {
               const ticket = tickets.find(t => t.id === ticketId)
-              return (
-                <Link
-                  key={ticketId}
-                  href={`/tickets/${ticketId}`}
-                  className="block bg-surface border border-subtle rounded-lg p-5 hover:border-accent transition-colors"
-                >
-                  <div className="flex items-center justify-between gap-4">
-                    <div>
-                      <p className="text-muted text-xs uppercase tracking-wide mb-1">Ticket</p>
-                      <p className="text-primary font-medium">
-                        {ticket ? ticket.title : ticketId}
-                      </p>
-                    </div>
-                    {ticket && (
-                      <span className="text-xs text-muted border border-subtle rounded px-2 py-1 flex-shrink-0">
-                        {ticket.difficulty}
-                      </span>
-                    )}
-                  </div>
-                </Link>
-              )
+              if (!ticket) return null
+              return <TicketCard key={ticketId} ticket={ticket} />
             })}
           </div>
         </section>
