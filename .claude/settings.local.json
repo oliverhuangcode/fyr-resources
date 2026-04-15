@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm *)",
+      "Bash(npx *)",
+      "Bash(node *)",
+      "Bash(git *)",
+      "Bash(gh *)",
+      "Bash(tsc *)",
+      "Skill(*)",
+      "mcp__plugin_everything-claude-code_context7__*"
+    ]
+  }
+}
