@@ -7,7 +7,7 @@ export const tracks: Track[] = [
     description: 'Learn Node.js, HTTP, Express, and build your first REST API from scratch.',
     icon: '⚙️',
     lessons: ['backend-01', 'backend-02', 'backend-03', 'backend-04', 'backend-05'],
-    tickets: ['backend-ticket-01'],
+    tickets: ['backend-ticket-01', 'backend-ticket-02'],
     courseResources: [
       {
         title: 'The Odin Project — NodeJS',

@@ -17,7 +17,9 @@ export function TicketCard({ ticket }: TicketCardProps) {
       <div className="bg-surface border border-subtle rounded-lg p-5 hover:border-accent transition-colors">
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1 min-w-0">
-            <p className="text-muted text-xs uppercase tracking-wide mb-1">Ticket</p>
+            <p className="text-muted text-xs uppercase tracking-wide mb-1">
+            {ticket.type === 'project' ? 'Guided Project' : 'Ticket'}
+          </p>
             <p className="text-primary font-medium">{ticket.title}</p>
           </div>
           <span className={DIFFICULTY_BADGE[ticket.difficulty]} aria-label={`Difficulty: ${ticket.difficulty}`}>

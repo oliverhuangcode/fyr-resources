@@ -6,7 +6,10 @@
       "Bash(ls -lt /Users/oliver/repos/fyr-resources/.ralph/logs/claude_output_*.log)",
       "Bash(ralph *)",
       "Bash(npx tsc *)",
-      "Bash(npm i *)"
+      "Bash(npm i *)",
+      "Bash(curl -s http://localhost:3000/tracks/backend)",
+      "Bash(curl -s http://localhost:3000/tickets/backend-ticket-02)",
+      "Bash(pkill -f \"next dev\")"
     ]
   }
 }

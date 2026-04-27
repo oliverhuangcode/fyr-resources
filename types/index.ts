@@ -44,11 +44,20 @@ export interface Track {
   courseResources: CourseResource[]
 }
 
+export interface ProjectTask {
+  title: string
+  description: string
+  checkpoint: string
+}
+
 export interface Ticket {
   id: string
   trackId: string
+  type?: 'ticket' | 'project'
   title: string
   context: string
+  concepts?: string[]
+  tasks?: ProjectTask[]
   requirements: string[]
   stretchGoals: string[]
   definitionOfDone: string
