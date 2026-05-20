@@ -1,6 +1,57 @@
 import type { Ticket } from '@/types'
 
 export const tickets: Ticket[] = [
+  // ─── Fullstack track ────────────────────────────────────────────────────
+  {
+    id: 'fullstack-ticket-01',
+    trackId: 'fullstack',
+    title: 'Build a React Task List',
+    context:
+      'You have worked through the first three lessons — components, props, and state. Before connecting any backend, prove the frontend fundamentals. Build a task list entirely in React state: add tasks, mark them done, and remove them.',
+    requirements: [
+      'Display a list of tasks',
+      'Add new tasks via a text input and a submit button',
+      'Mark a task as complete by clicking it — show a visible difference (strikethrough, dimmed text, or a checkmark)',
+      'Delete a task via a button on each task',
+      'An empty input must not add a task',
+      'Task data lives in React state — not a global variable, not the DOM',
+    ],
+    stretchGoals: [
+      'Filter tasks by status: All / Active / Completed',
+      'Show a count of incomplete tasks',
+      'Persist tasks to localStorage so they survive a page refresh',
+      'Add keyboard support: pressing Enter in the input submits the form',
+    ],
+    definitionOfDone:
+      'All four interactions (add, complete, delete, empty-input guard) work in the browser. The list updates immediately on every action. No console errors.',
+    difficulty: 'starter',
+  },
+  {
+    id: 'fullstack-ticket-02',
+    trackId: 'fullstack',
+    title: 'Fullstack Notes App',
+    context:
+      'You have worked through all five fullstack lessons. Now connect the two halves: build a React frontend that talks to an Express backend over real HTTP. No database — use in-memory storage on the backend. The goal is to experience the complete fullstack loop: render, fetch, mutate, re-render.',
+    requirements: [
+      'Express API with three endpoints: GET /api/notes (list all), POST /api/notes (create), DELETE /api/notes/:id (remove)',
+      'CORS configured so the React frontend can reach the Express server',
+      'React frontend that fetches and displays all notes when it first loads',
+      'A form to add a new note — at minimum a title field',
+      'A delete button on each note that removes it via the API and updates the UI',
+      'A loading state shown while the initial fetch is in progress',
+    ],
+    stretchGoals: [
+      'Add PUT /api/notes/:id and implement inline editing in the frontend',
+      'Show an error message in the UI when an API request fails',
+      'Persist notes to a JSON file on the server so they survive restarts',
+      'Add an environment variable for the API base URL in the React app',
+    ],
+    definitionOfDone:
+      'You can add, view, and delete notes. Every action makes a real HTTP request to your Express backend — verified in the Network tab of DevTools. Refreshing the page shows the current server state.',
+    difficulty: 'intermediate',
+  },
+
+  // ─── Backend track ───────────────────────────────────────────────────────
   {
     id: 'backend-ticket-02',
     trackId: 'backend',

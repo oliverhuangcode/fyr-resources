@@ -1,6 +1,681 @@
 import type { Lesson } from '@/types'
 
 export const lessons: Lesson[] = [
+  // ─── Fullstack track ──────────────────────────────────────────────────────
+  {
+    id: 'fullstack-01',
+    trackId: 'fullstack',
+    stage: 1,
+    title: 'React Fundamentals — Components & JSX',
+    description:
+      'Understand what React is and why it exists, write your first components, and learn the rules of JSX.',
+    skills: [
+      'What React is and the problem it solves',
+      'Components as the building blocks of UI',
+      'Writing JSX and understanding its rules',
+      'Composing components inside each other',
+    ],
+    content: [
+      {
+        type: 'text',
+        heading: 'What is React?',
+        body: `React is a JavaScript library for building user interfaces. Not a framework — a library. It has one job: given some data, render some UI. When the data changes, update the UI. That's the whole pitch.\n\nBefore React, you'd build dynamic UIs by manually updating the DOM. \`document.querySelector\`, \`.innerHTML\`, \`.classList.add\`. This works fine for small pages. But the moment you have a dozen interactive pieces sharing data, it becomes a mess — you're constantly tracking what changed and manually syncing it with the DOM.\n\nReact flips the model. Instead of imperatively saying "go find that element and change its text", you describe what the UI should look like for a given state, and React figures out what needs updating. This is called declarative UI, and it's why React feels different the first time you use it.`,
+      },
+      {
+        type: 'text',
+        heading: 'Components — the unit of UI',
+        body: `A React component is just a JavaScript function that returns JSX. That's it. You build UIs by composing components together — a Button inside a Card inside a Layout.\n\nA few rules:\n- Component names must start with a capital letter. React uses this to tell components apart from plain HTML tags.\n- A component must return a single root element. Wrap siblings in a \`<div>\` or a Fragment (\`<>...</>\`).\n- Components are reusable — write once, use anywhere with different data passed in as props.`,
+      },
+      {
+        type: 'code',
+        heading: 'Your first component',
+        language: 'jsx',
+        body: `// A component is a function that returns JSX
+function Greeting() {
+  return <h1>Hello, MAC!</h1>
+}
+
+// Compose components inside each other
+function App() {
+  return (
+    <div>
+      <Greeting />
+      <Greeting />
+    </div>
+  )
+}
+
+export default App`,
+      },
+      {
+        type: 'text',
+        heading: 'JSX — HTML in JavaScript',
+        body: `JSX looks like HTML, but it compiles to regular JavaScript function calls. A build tool (Vite, Next.js) handles the conversion automatically.\n\nThe key rules that differ from HTML:\n\n**className, not class** — \`class\` is a reserved word in JS, so JSX uses \`className\` for CSS classes.\n\n**All tags must close** — \`<input />\`, not \`<input>\`. Self-closing tags need the slash.\n\n**Expressions in curly braces** — to embed JavaScript inside JSX, wrap it in \`{}\`: \`<p>{username}</p>\`, \`<p>{2 + 2}</p>\`, \`<p>{isOnline ? 'Online' : 'Offline'}</p>\`.\n\n**One root element** — a component returns one element. Multiple siblings need to be wrapped.`,
+      },
+      {
+        type: 'code',
+        heading: 'JSX in practice',
+        language: 'jsx',
+        body: `function UserCard() {
+  const name = 'Alex'
+  const isOnline = true
+
+  return (
+    <div className="card">        {/* className, not class */}
+      <h2>{name}</h2>             {/* variable in {} */}
+      <p>{isOnline ? 'Online' : 'Offline'}</p>  {/* ternary in {} */}
+      <img src="/avatar.png" alt="User avatar" />  {/* self-closing */}
+    </div>
+  )
+}`,
+      },
+      {
+        type: 'note',
+        heading: "React doesn't care how you organise your files",
+        body: `React is a library, not a framework. It has opinions about components and state, but it doesn't dictate your folder structure, routing approach, or data fetching strategy. You'll often see projects using Vite for bundling, React Router for routing, and separate packages for everything else. That's the ecosystem, not React itself.`,
+      },
+    ],
+    resources: [
+      {
+        title: 'React Quick Start — react.dev',
+        url: 'https://react.dev/learn',
+        type: 'reading',
+      },
+      {
+        title: 'React in 100 Seconds — Fireship',
+        url: 'https://www.youtube.com/watch?v=Tn6-PIqc4UM',
+        type: 'video',
+      },
+      {
+        title: 'Official React Tutorial: Tic-Tac-Toe',
+        url: 'https://react.dev/learn/tutorial-tic-tac-toe',
+        type: 'interactive',
+      },
+    ],
+    selfCheck: [
+      {
+        question: "React is called 'declarative'. What does that mean in practice? How is it different from manually updating the DOM?",
+        answer: "Declarative means you describe the UI you want for a given state, not the steps to get there. With the DOM, you'd say 'find this element and change its text'. With React, you say 'when the user's name is X, the UI looks like this' — and React handles what needs to change. The code describes what, not how.",
+      },
+      {
+        question: "JSX isn't HTML. What would happen if you wrote `<div class=\"card\">` in a React component? What should it be?",
+        answer: "It would likely still render, but React would warn you. JSX compiles to JavaScript, and `class` is a reserved word in JS (for defining classes). The correct attribute is `className`. Same applies to `for` on labels — use `htmlFor` instead.",
+      },
+      {
+        question: "Why do component names need to start with a capital letter in React?",
+        answer: "React uses capitalisation to distinguish HTML elements from components. A lowercase `<div>` means the built-in HTML div. An uppercase `<Card>` means your custom Card component. Without this convention, React couldn't tell which to render.",
+      },
+    ],
+  },
+
+  {
+    id: 'fullstack-02',
+    trackId: 'fullstack',
+    stage: 2,
+    title: 'Props & Rendering Lists',
+    description:
+      'Learn how to pass data into components with props, build reusable UI, and render arrays of data cleanly.',
+    skills: [
+      'Passing data into components with props',
+      'Destructuring props in function signatures',
+      'Rendering lists with .map()',
+      'Why keys are required — and why index is usually wrong',
+    ],
+    content: [
+      {
+        type: 'text',
+        heading: 'What are props?',
+        body: `Props (short for properties) are how you pass data into a component. They work like function arguments — the parent decides what to pass, and the child receives it as a plain object.\n\nProps are read-only. A component must never modify its own props. This enforces one-way data flow: data flows down from parent to child, never the other way. If a value needs to change, it should live in state (covered next lesson) — not be mutated in props.`,
+      },
+      {
+        type: 'code',
+        heading: 'Passing and using props',
+        language: 'jsx',
+        body: `// Defining a component that accepts props
+// Destructuring directly in the function signature is the standard pattern
+function UserCard({ name, email, isOnline }) {
+  return (
+    <div className="card">
+      <h2>{name}</h2>
+      <p>{email}</p>
+      <span>{isOnline ? 'Online' : 'Offline'}</span>
+    </div>
+  )
+}
+
+// Using it — props look like HTML attributes
+function App() {
+  return (
+    <UserCard
+      name="Alex"
+      email="alex@example.com"
+      isOnline={true}       // strings go in quotes; everything else in {}
+    />
+  )
+}`,
+      },
+      {
+        type: 'text',
+        heading: 'Rendering lists with .map()',
+        body: `When you have an array of data, render it with \`.map()\`. Each item becomes a JSX element. This is the standard pattern — you'll use it constantly.\n\nThe \`.map()\` call lives inside \`{}\` in your JSX, same as any JavaScript expression.`,
+      },
+      {
+        type: 'code',
+        heading: 'A list of cards from data',
+        language: 'jsx',
+        body: `const users = [
+  { id: 1, name: 'Alex', email: 'alex@example.com' },
+  { id: 2, name: 'Jordan', email: 'jordan@example.com' },
+  { id: 3, name: 'Sam', email: 'sam@example.com' },
+]
+
+function UserList() {
+  return (
+    <ul>
+      {users.map(user => (
+        <li key={user.id}>
+          <UserCard name={user.name} email={user.email} />
+        </li>
+      ))}
+    </ul>
+  )
+}`,
+      },
+      {
+        type: 'text',
+        heading: 'Keys — why they matter',
+        body: `Every item in a rendered list needs a \`key\` prop. React uses keys to identify which items changed, were added, or removed between renders.\n\nThe key must be:\n- **Unique within the list** — no two siblings share a key\n- **Stable** — the same data item should have the same key on every render\n\nDon't use the array index (\`key={i}\`) unless the list is static and never reorders. If a user deletes the first item, all indices shift — React will think items merely changed when they didn't, and any internal state (like a text input inside a list item) will follow the wrong item. Use a real ID from your data.`,
+      },
+      {
+        type: 'note',
+        heading: 'Props vs state — the one-liner',
+        body: `Props come from outside. State lives inside. A component can't change its own props. If a value needs to change in response to user interaction, it belongs in state (next lesson). Think of props as the input and state as the memory.`,
+      },
+    ],
+    resources: [
+      {
+        title: 'Passing Props to a Component — react.dev',
+        url: 'https://react.dev/learn/passing-props-to-a-component',
+        type: 'reading',
+      },
+      {
+        title: 'Rendering Lists — react.dev',
+        url: 'https://react.dev/learn/rendering-lists',
+        type: 'reading',
+      },
+      {
+        title: 'React Props & Lists — Net Ninja',
+        url: 'https://www.youtube.com/watch?v=PHaECbrKgs0',
+        type: 'video',
+      },
+    ],
+    selfCheck: [
+      {
+        question: "What's wrong with `users.map((user, i) => <li key={i}>...</li>)`? When would this cause a bug?",
+        answer: "Array indices as keys break when the list reorders or shrinks. Say you have 3 items (keys 0, 1, 2) and delete the second. React sees keys 0 and 1 — it thinks item 1 became item 2 (just changed). If those items have internal state (e.g., a typed input), that state follows the wrong item. Use stable IDs from your data instead.",
+      },
+      {
+        question: "You want a component to show a username in the header. That username comes from the user's profile data. Would you put it in props or state? Why?",
+        answer: "Props — it's data coming from outside the component (from a parent or a data store). Props are for data the component receives and displays. State is for data the component itself tracks and updates. If the header just displays what it's given, props is the right choice.",
+      },
+      {
+        question: "Write a `ProductCard` component that accepts `name` (string) and `price` (number) as props and renders them. Don't worry about styling.",
+        answer: `function ProductCard({ name, price }) {
+  return (
+    <div>
+      <h3>{name}</h3>
+      <p>{price}</p>
+    </div>
+  )
+}`,
+      },
+    ],
+  },
+
+  {
+    id: 'fullstack-03',
+    trackId: 'fullstack',
+    stage: 3,
+    title: 'State with useState',
+    description:
+      'Add interactivity to your components: declare state, respond to events, and understand why React re-renders.',
+    skills: [
+      'Declaring and updating state with useState',
+      'Handling button clicks and input changes',
+      'Why you must use the setter, not direct mutation',
+      'Controlled inputs',
+    ],
+    content: [
+      {
+        type: 'text',
+        heading: 'What is state?',
+        body: `State is data that lives inside a component and can change over time. When state changes, React re-renders the component with the new value — the UI stays in sync automatically.\n\nProps are data from outside. State is data from inside. If your component needs to remember something — whether a modal is open, what a user typed, a click count — that's state.\n\nYou declare state with the \`useState\` hook, imported from React.`,
+      },
+      {
+        type: 'code',
+        heading: 'useState in action',
+        language: 'jsx',
+        body: `import { useState } from 'react'
+
+function Counter() {
+  // useState returns [currentValue, setterFunction]
+  // 0 is the initial value
+  const [count, setCount] = useState(0)
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>+1</button>
+      <button onClick={() => setCount(count - 1)}>-1</button>
+      <button onClick={() => setCount(0)}>Reset</button>
+    </div>
+  )
+}`,
+      },
+      {
+        type: 'text',
+        heading: 'How re-renders work',
+        body: `When you call a setter function (\`setCount\`), React:\n1. Schedules a re-render with the new state value\n2. Re-executes your component function with the updated state\n3. Diffs the new output against the previous render and updates only what changed in the DOM\n\nThis is why you must use the setter — writing \`count = count + 1\` does nothing React can detect. Direct variable changes bypass React's system entirely.`,
+      },
+      {
+        type: 'text',
+        heading: 'Controlled inputs',
+        body: `Forms in React typically use controlled inputs — the input's value is driven by state. On every keystroke, the \`onChange\` handler updates state, which React immediately reflects in the input's \`value\` prop. This gives you full control: you can validate, transform, or reset the input value from JavaScript at any point.`,
+      },
+      {
+        type: 'code',
+        heading: 'A controlled text input',
+        language: 'jsx',
+        body: `import { useState } from 'react'
+
+function SearchBar() {
+  const [query, setQuery] = useState('')
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={query}                              // controlled: mirrors state
+        onChange={(e) => setQuery(e.target.value)} // update on every keystroke
+        placeholder="Search..."
+      />
+      <p>Searching for: {query}</p>
+    </div>
+  )
+}`,
+      },
+      {
+        type: 'code',
+        heading: 'State with objects — spread to update',
+        language: 'jsx',
+        body: `function ProfileForm() {
+  const [profile, setProfile] = useState({ name: '', email: '' })
+
+  function handleNameChange(e) {
+    // Spread existing state, override only the changed field
+    setProfile({ ...profile, name: e.target.value })
+    // NOT: profile.name = e.target.value  ← mutation, React won't detect it
+  }
+
+  return (
+    <input value={profile.name} onChange={handleNameChange} placeholder="Name" />
+  )
+}`,
+      },
+      {
+        type: 'note',
+        heading: 'State updates are asynchronous',
+        body: `Calling \`setCount(count + 1)\` doesn't update \`count\` immediately in the current render. React batches updates and applies them before the next render. If you need the new value to depend on the previous one — especially when calling setters multiple times — use the function form:\n\n\`setCount(prev => prev + 1)\`\n\nThis always uses the latest value, even if React batched multiple updates together.`,
+      },
+    ],
+    resources: [
+      {
+        title: "State: A Component's Memory — react.dev",
+        url: 'https://react.dev/learn/state-a-components-memory',
+        type: 'reading',
+      },
+      {
+        title: 'useState Hook Explained — Codevolution',
+        url: 'https://www.youtube.com/watch?v=lAW1Jmmr9hc',
+        type: 'video',
+      },
+      {
+        title: 'Adding Interactivity — react.dev',
+        url: 'https://react.dev/learn/adding-interactivity',
+        type: 'reading',
+      },
+    ],
+    selfCheck: [
+      {
+        question: "What happens if you write `count = count + 1` instead of `setCount(count + 1)`? Why doesn't React update the UI?",
+        answer: "The variable changes in memory, but React has no way to detect it. React only knows to re-render when a setter function is called. Direct mutations bypass React's tracking entirely — the UI stays frozen at the old value even though the variable changed.",
+      },
+      {
+        question: "What's a controlled input? Why is it more useful than reading the DOM with `document.querySelector`?",
+        answer: "A controlled input has its value driven by React state — `value={query}` plus an `onChange` that calls `setQuery`. This means the current input value is always a JS variable you can read, validate, and reset from anywhere in the component. Reading the DOM directly couples you to the HTML structure and sidesteps React's update model.",
+      },
+      {
+        question: "You want a toggle button that switches between 'Show' and 'Hide' each click. Write the state declaration and the onClick handler.",
+        answer: `const [isVisible, setIsVisible] = useState(false)
+
+<button onClick={() => setIsVisible(prev => !prev)}>
+  {isVisible ? 'Hide' : 'Show'}
+</button>`,
+      },
+    ],
+  },
+
+  {
+    id: 'fullstack-04',
+    trackId: 'fullstack',
+    stage: 4,
+    title: 'Side Effects & Fetching Data',
+    description:
+      'Learn what side effects are in React, use useEffect to run code after render, and fetch real data from an API.',
+    skills: [
+      'What a side effect is and why it needs special handling',
+      'Using useEffect with the dependency array',
+      'Fetching data from an API on component mount',
+      'Handling loading and error states',
+      'Cleaning up effects to prevent memory leaks',
+    ],
+    content: [
+      {
+        type: 'text',
+        heading: 'What is a side effect?',
+        body: `A side effect is anything a component does that reaches outside its own render cycle: fetching data from an API, setting the page title, starting a timer, writing to localStorage, adding an event listener.\n\nReact components are supposed to be pure — given the same props and state, they return the same JSX. Side effects break that purity by interacting with the outside world. \`useEffect\` is React's way of handling them safely: it lets you run that code after React has finished rendering.`,
+      },
+      {
+        type: 'code',
+        heading: 'useEffect basics',
+        language: 'jsx',
+        body: `import { useEffect } from 'react'
+
+function PageTitle({ title }) {
+  useEffect(() => {
+    document.title = title  // side effect: touches the browser
+  }, [title]) // re-run whenever title changes
+
+  return <h1>{title}</h1>
+}`,
+      },
+      {
+        type: 'text',
+        heading: 'The dependency array',
+        body: `The second argument to \`useEffect\` controls when the effect runs:\n\n- \`[]\` — run once, when the component first mounts. Perfect for data fetching.\n- \`[value]\` — run on mount, and again whenever \`value\` changes.\n- No array — run after every render. This is almost always a mistake.\n\nIf your effect uses a variable from the component (a prop or state value), that variable should be in the array. Leaving it out is how you get stale data — the effect runs but uses an old value it captured at mount.`,
+      },
+      {
+        type: 'code',
+        heading: 'Fetching data from an API',
+        language: 'jsx',
+        body: `import { useState, useEffect } from 'react'
+
+function UserList() {
+  const [users, setUsers] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(res => {
+        if (!res.ok) throw new Error(\`Request failed: \${res.status}\`)
+        return res.json()
+      })
+      .then(data => {
+        setUsers(data)
+        setLoading(false)
+      })
+      .catch(err => {
+        setError(err.message)
+        setLoading(false)
+      })
+  }, []) // [] = fetch once on mount
+
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error: {error}</p>
+
+  return (
+    <ul>
+      {users.map(user => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
+  )
+}`,
+      },
+      {
+        type: 'text',
+        heading: 'Cleanup functions',
+        body: `Some effects need to clean up after themselves — timers, subscriptions, event listeners. If the component unmounts while an effect is still running and you don't clean up, you can get memory leaks and React warnings about updating state on an unmounted component.\n\nReturn a cleanup function from your effect and React will call it when the component unmounts (or before the effect re-runs).`,
+      },
+      {
+        type: 'code',
+        heading: 'An effect with cleanup',
+        language: 'jsx',
+        body: `useEffect(() => {
+  const timer = setInterval(() => {
+    setCount(c => c + 1)
+  }, 1000)
+
+  return () => clearInterval(timer) // cleanup: runs when component unmounts
+}, []) // start timer once on mount, clear it on unmount`,
+      },
+      {
+        type: 'note',
+        heading: "fetch doesn't throw on 4xx/5xx",
+        body: `This catches everyone at first: \`fetch\` only rejects the promise if the network request itself fails (no connection, DNS error). A 404 or 500 response still resolves successfully. Always check \`response.ok\` before calling \`.json()\`, or you'll try to parse an error page as JSON and get a confusing parse error instead of the real problem.`,
+      },
+    ],
+    resources: [
+      {
+        title: 'Synchronizing with Effects — react.dev',
+        url: 'https://react.dev/learn/synchronizing-with-effects',
+        type: 'reading',
+      },
+      {
+        title: 'useEffect Explained — Net Ninja',
+        url: 'https://www.youtube.com/watch?v=gv9ugDJ1ynU',
+        type: 'video',
+      },
+      {
+        title: 'JSONPlaceholder — Free Fake API for testing',
+        url: 'https://jsonplaceholder.typicode.com/',
+        type: 'interactive',
+      },
+    ],
+    selfCheck: [
+      {
+        question: "Why can't you fetch data inside the component function directly? Why does it need to go in useEffect?",
+        answer: "If you fetched directly in the render function, it would run on every render — including the re-renders triggered by calling setUsers with the response data, causing an infinite loop. useEffect runs after the render and respects the dependency array, so with [] you fetch once and stop.",
+      },
+      {
+        question: "Your effect fetches a user by ID from a prop: `useEffect(() => { fetchUser(userId) }, [])`. What's the bug?",
+        answer: "The dependency array is missing `userId`. The effect fetches on mount with the initial userId, but if the parent later passes a different userId prop, the effect won't re-run. The component stays frozen showing the old user. Fix: use `[userId]` as the dependency array.",
+      },
+      {
+        question: "What does it mean that fetch 'doesn't throw on 404'? Write the correct pattern for handling a failed response.",
+        answer: `fetch('/api/users/999') will resolve (not reject) even if the server returns 404. To catch it, check res.ok:
+
+fetch('/api/users/999')
+  .then(res => {
+    if (!res.ok) throw new Error(\`\${res.status} \${res.statusText}\`)
+    return res.json()
+  })
+
+Without this check you call .json() on an HTML error page and get a JSON parse error instead of a clear "404 Not Found".`,
+      },
+    ],
+  },
+
+  {
+    id: 'fullstack-05',
+    trackId: 'fullstack',
+    stage: 5,
+    title: 'Connecting React to Express',
+    description:
+      'Wire your React frontend to an Express backend: understand CORS, fetch from your own API, and send POST and DELETE requests.',
+    skills: [
+      'The fullstack request/response flow',
+      'What CORS is and why browsers enforce it',
+      'Enabling CORS on an Express server',
+      'Fetching from your API in React',
+      'Sending POST requests with fetch',
+      'Environment variables for API URLs',
+    ],
+    content: [
+      {
+        type: 'text',
+        heading: 'The fullstack picture',
+        body: `A fullstack application has two parts:\n\n**Frontend** — your React app, running in the browser, handling UI. In development it runs on \`localhost:3000\` (or \`5173\` with Vite).\n\n**Backend** — your Express server, running on Node.js, handling data and business logic. It typically runs on a different port, like \`localhost:3001\`.\n\nIn development they're two separate processes. The React app talks to the Express API over HTTP — the same way it would call any public API. Everything you've learned about \`fetch\`, \`useEffect\`, and HTTP applies directly. The one new concept is CORS.`,
+      },
+      {
+        type: 'text',
+        heading: 'CORS — why the browser blocks cross-origin requests',
+        body: `Browsers enforce a same-origin policy: by default, code running on \`http://localhost:3000\` cannot make requests to \`http://localhost:3001\`. Different port counts as a different origin.\n\nThis protects users — a malicious site can't silently send requests to your bank's API using your logged-in session. But it means your React app is blocked from talking to your Express app until you explicitly allow it.\n\nThe fix is simple: configure your Express server to send the right response headers that tell the browser it's allowed.`,
+      },
+      {
+        type: 'code',
+        heading: 'Enabling CORS on Express',
+        language: 'javascript',
+        body: `// npm install cors
+const express = require('express')
+const cors = require('cors')
+
+const app = express()
+
+// Allow requests from your React app
+app.use(cors({
+  origin: 'http://localhost:3000'
+}))
+
+app.use(express.json())
+
+app.get('/api/todos', (req, res) => {
+  res.json([{ id: 1, text: 'Learn fullstack', done: false }])
+})
+
+app.listen(3001, () => console.log('Backend on port 3001'))
+
+// In production, replace 'http://localhost:3000' with your deployed frontend URL`,
+      },
+      {
+        type: 'code',
+        heading: 'Fetching from your Express API in React',
+        language: 'jsx',
+        body: `import { useState, useEffect } from 'react'
+
+function TodoList() {
+  const [todos, setTodos] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch('http://localhost:3001/api/todos')
+      .then(res => res.json())
+      .then(data => {
+        setTodos(data)
+        setLoading(false)
+      })
+  }, [])
+
+  if (loading) return <p>Loading...</p>
+
+  return (
+    <ul>
+      {todos.map(todo => (
+        <li key={todo.id}>{todo.text}</li>
+      ))}
+    </ul>
+  )
+}`,
+      },
+      {
+        type: 'text',
+        heading: 'Sending POST and DELETE requests',
+        body: `GET is the default. For POST, PUT, PATCH, and DELETE you need to set the method, add a \`Content-Type\` header, and stringify the body.\n\nWithout the \`Content-Type: application/json\` header, Express's \`express.json()\` middleware won't parse the body — \`req.body\` will be \`undefined\`.`,
+      },
+      {
+        type: 'code',
+        heading: 'POST and DELETE with fetch',
+        language: 'jsx',
+        body: `// Create a todo
+async function createTodo(text) {
+  const res = await fetch('http://localhost:3001/api/todos', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text }),
+  })
+  if (!res.ok) throw new Error('Failed to create')
+  return res.json()
+}
+
+// Delete a todo
+async function deleteTodo(id) {
+  const res = await fetch(\`http://localhost:3001/api/todos/\${id}\`, {
+    method: 'DELETE',
+  })
+  if (!res.ok) throw new Error('Failed to delete')
+}
+
+// In a component — refresh the list after each mutation
+function TodoForm({ onCreated }) {
+  const [text, setText] = useState('')
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    if (!text.trim()) return
+    await createTodo(text)
+    setText('')
+    onCreated() // let the parent re-fetch the list
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input value={text} onChange={e => setText(e.target.value)} />
+      <button type="submit">Add</button>
+    </form>
+  )
+}`,
+      },
+      {
+        type: 'note',
+        heading: 'Use environment variables for the API URL',
+        body: `Never hardcode \`http://localhost:3001\` throughout your components — that URL changes in production. Put it in a \`.env\` file at your React project root:\n\n\`VITE_API_URL=http://localhost:3001\`\n\nThen in your code: \`const API_URL = import.meta.env.VITE_API_URL\`\n\nWhen you deploy, set \`VITE_API_URL\` to your production backend URL in your hosting platform. The code stays the same.`,
+      },
+    ],
+    resources: [
+      {
+        title: 'cors — npm package docs',
+        url: 'https://www.npmjs.com/package/cors',
+        type: 'reading',
+      },
+      {
+        title: 'Fetch API — MDN Web Docs',
+        url: 'https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch',
+        type: 'reading',
+      },
+      {
+        title: 'Fullstack React + Node/Express — Net Ninja',
+        url: 'https://www.youtube.com/watch?v=w3vs4a03y3I',
+        type: 'video',
+      },
+    ],
+    selfCheck: [
+      {
+        question: "Your React app is on port 3000 and your Express app is on port 3001. You fetch from the API and get a CORS error. What do you need to do?",
+        answer: "Install and configure the `cors` package on the Express server: `app.use(cors({ origin: 'http://localhost:3000' }))`. The browser blocks cross-origin requests unless the server explicitly opts in. The cors middleware makes Express send the `Access-Control-Allow-Origin` header with every response, which tells the browser the request is allowed.",
+      },
+      {
+        question: "When sending a POST request with fetch, what three things do you need to set that you don't need for a GET?",
+        answer: "(1) `method: 'POST'` in the options. (2) `'Content-Type': 'application/json'` in headers, so Express knows how to parse the body. (3) `body: JSON.stringify(data)` — the data as a JSON string. Without the Content-Type header, Express's `express.json()` middleware won't parse the body, leaving `req.body` as undefined.",
+      },
+      {
+        question: "What's wrong with hardcoding `http://localhost:3001` in your fetch calls? How do environment variables fix it?",
+        answer: "It breaks in production where your backend runs on a different URL. Environment variables let you set the URL per environment without touching code — `VITE_API_URL` in a local `.env` for development, a different value set in your deployment platform for production. The code reads `import.meta.env.VITE_API_URL` and works in both environments.",
+      },
+    ],
+  },
+
+  // ─── Backend track ────────────────────────────────────────────────────────
   {
     id: 'backend-01',
     trackId: 'backend',

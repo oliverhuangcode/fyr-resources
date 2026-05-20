@@ -9,7 +9,11 @@
       "Bash(npm i *)",
       "Bash(curl -s http://localhost:3000/tracks/backend)",
       "Bash(curl -s http://localhost:3000/tickets/backend-ticket-02)",
-      "Bash(pkill -f \"next dev\")"
+      "Bash(pkill -f \"next dev\")",
+      "mcp__plugin_everything-claude-code_exa__web_search_exa",
+      "Bash(grep -n '`' /Users/oliver/repos/fyr-resources/data/lessons.ts)",
+      "Bash(grep -v \"^.*body: \\\\`\")",
+      "Bash(grep -n \"// re-run whenever\\\\|whenever \\\\`\\\\|// re-run\" /Users/oliver/repos/fyr-resources/data/lessons.ts)"
     ]
   }
 }
