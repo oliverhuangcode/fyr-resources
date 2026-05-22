@@ -129,6 +129,29 @@ export default async function TicketPage({ params }: TicketPageProps) {
         </section>
       )}
 
+      {/* Starter Repo */}
+      {ticket.starterRepo && (
+        <section className="mb-8">
+          <h2 className="text-lg font-semibold text-primary mb-3">Starter code</h2>
+          <a
+            href={ticket.starterRepo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-between gap-4 bg-surface border border-subtle rounded-lg px-5 py-4 hover:border-accent transition-colors group"
+          >
+            <div>
+              <p className="text-primary text-sm font-medium group-hover:text-accent transition-colors">
+                {ticket.starterRepo.replace('https://', '')}
+              </p>
+              <p className="text-muted text-xs mt-0.5">
+                Clone this repo — project structure and stubs are ready, you write the logic.
+              </p>
+            </div>
+            <span className="text-muted group-hover:text-accent transition-colors flex-shrink-0" aria-hidden="true">↗</span>
+          </a>
+        </section>
+      )}
+
       {/* Definition of Done */}
       <section className="mb-8">
         <div className="bg-surface border border-subtle rounded-lg p-5">

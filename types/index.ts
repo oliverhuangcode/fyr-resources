@@ -63,4 +63,5 @@ export interface Ticket {
   definitionOfDone: string
   difficulty: 'starter' | 'intermediate' | 'advanced'
   afterStage?: number
+  starterRepo?: string
 }

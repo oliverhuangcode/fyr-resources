@@ -7,7 +7,8 @@ export const tickets: Ticket[] = [
     trackId: 'fullstack',
     title: 'Build a React Task List',
     context:
-      'You have worked through the first three lessons — components, props, and state. Before connecting any backend, prove the frontend fundamentals. Build a task list entirely in React state: add tasks, mark them done, and remove them. A starter skeleton with the project structure and component stubs is available at https://github.com/oliverhuangcode/mac-fullstack-starters — clone it, run npm install, and work through the TODOs.',
+      'You have worked through the first three lessons — components, props, and state. Before connecting any backend, prove the frontend fundamentals. Build a task list entirely in React state: add tasks, mark them done, and remove them.',
+    starterRepo: 'https://github.com/oliverhuangcode/mac-fullstack-starters',
     requirements: [
       'Display a list of tasks',
       'Add new tasks via a text input and a submit button',
@@ -32,7 +33,8 @@ export const tickets: Ticket[] = [
     trackId: 'fullstack',
     title: 'Fullstack Notes App',
     context:
-      'You have worked through all five fullstack lessons. Now connect the two halves: build a React frontend that talks to an Express backend over real HTTP. No database — use in-memory storage on the backend. The goal is to experience the complete fullstack loop: render, fetch, mutate, re-render. A starter skeleton with the backend routes and frontend components stubbed out is available at https://github.com/oliverhuangcode/mac-fullstack-starters — start with the backend, test each route in Hoppscotch, then wire up the frontend.',
+      'You have worked through all five fullstack lessons. Now connect the two halves: build a React frontend that talks to an Express backend over real HTTP. No database — use in-memory storage on the backend. The goal is to experience the complete fullstack loop: render, fetch, mutate, re-render.',
+    starterRepo: 'https://github.com/oliverhuangcode/mac-fullstack-starters',
     requirements: [
       'Express API with three endpoints: GET /api/notes (list all), POST /api/notes (create), DELETE /api/notes/:id (remove)',
       'CORS configured so the React frontend can reach the Express server',

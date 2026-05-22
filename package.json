@@ -12,7 +12,8 @@
     "geist": "^1.7.0",
     "next": "^16.2.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "sugar-high": "^1.2.0"
   },
   "devDependencies": {
     "@types/node": "^20",

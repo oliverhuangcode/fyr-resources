@@ -6,6 +6,19 @@ body {
   @apply bg-base text-primary;
 }
 
+/* sugar-high syntax token colours */
+:root {
+  --sh-keyword:     #F5C518; /* accent yellow — const, let, return, if */
+  --sh-string:      #87CEEB; /* sky blue — string literals */
+  --sh-comment:     #555555; /* dim — // comments */
+  --sh-identifier:  #E8A87C; /* orange — function names, variables */
+  --sh-class:       #7EC8E3; /* light blue — class / component names */
+  --sh-sign:        #666666; /* gray — punctuation, operators */
+  --sh-jsxliterals: #7EC8E3; /* light blue — JSX tag text */
+  --sh-property:    #E8A87C; /* orange — object properties */
+  --sh-entity:      #B5EAD7; /* mint — special entities */
+}
+
 @layer components {
   .page-container {
     @apply mx-auto max-w-5xl px-4 sm:px-6 py-10;

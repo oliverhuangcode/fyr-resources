@@ -1,10 +1,13 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import { highlight } from 'sugar-high'
 import { lessons } from '@/data/lessons'
 import { tracks } from '@/data/tracks'
 import { ResourceLink } from '@/components/ResourceLink'
 import { MarkLessonComplete } from '@/components/MarkLessonComplete'
 import { SelfCheckItem } from '@/components/SelfCheckItem'
+import { parseInline } from '@/utils/parseInline'
+import { CodeBlock } from '@/components/CodeBlock'
 import type { LessonSection } from '@/types'
 
 export function generateStaticParams() {
@@ -17,27 +20,31 @@ interface LessonPageProps {
 
 function ContentSection({ section }: { section: LessonSection }) {
   if (section.type === 'code') {
+    const highlighted = highlight(section.body)
     return (
       <div className="mb-8">
         {section.heading && (
           <h3 className="text-base font-semibold text-primary mb-3">{section.heading}</h3>
         )}
-        <pre className="bg-surface border border-subtle rounded-lg p-5 overflow-x-auto">
-          <code className="text-sm text-primary font-mono leading-relaxed whitespace-pre">
-            {section.body}
-          </code>
-        </pre>
+        <CodeBlock code={section.body} highlighted={highlighted} />
       </div>
     )
   }
 
   if (section.type === 'note') {
+    const paragraphs = section.body.split('\n\n')
     return (
       <div className="mb-8 border-l-2 border-accent pl-5">
         {section.heading && (
           <p className="text-accent text-sm font-semibold mb-2">{section.heading}</p>
         )}
-        <p className="text-muted text-sm leading-relaxed">{section.body}</p>
+        <div className="space-y-2">
+          {paragraphs.map((para, i) => (
+            <p key={i} className="text-muted text-sm leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
+              {parseInline(para)}
+            </p>
+          ))}
+        </div>
       </div>
     )
   }
@@ -52,7 +59,7 @@ function ContentSection({ section }: { section: LessonSection }) {
       <div className="space-y-3">
         {paragraphs.map((para, i) => (
           <p key={i} className="text-primary leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
-            {para}
+            {parseInline(para)}
           </p>
         ))}
       </div>
