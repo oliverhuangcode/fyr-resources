@@ -7,7 +7,7 @@ export const tickets: Ticket[] = [
     trackId: 'fullstack',
     title: 'Build a React Task List',
     context:
-      'You have worked through the first three lessons — components, props, and state. Before connecting any backend, prove the frontend fundamentals. Build a task list entirely in React state: add tasks, mark them done, and remove them.',
+      'You have worked through the first three lessons — components, props, and state. Before connecting any backend, prove the frontend fundamentals. Build a task list entirely in React state: add tasks, mark them done, and remove them. A starter skeleton with the project structure and component stubs is available at https://github.com/oliverhuangcode/mac-fullstack-starters — clone it, run npm install, and work through the TODOs.',
     requirements: [
       'Display a list of tasks',
       'Add new tasks via a text input and a submit button',
@@ -25,13 +25,14 @@ export const tickets: Ticket[] = [
     definitionOfDone:
       'All four interactions (add, complete, delete, empty-input guard) work in the browser. The list updates immediately on every action. No console errors.',
     difficulty: 'starter',
+    afterStage: 3,
   },
   {
     id: 'fullstack-ticket-02',
     trackId: 'fullstack',
     title: 'Fullstack Notes App',
     context:
-      'You have worked through all five fullstack lessons. Now connect the two halves: build a React frontend that talks to an Express backend over real HTTP. No database — use in-memory storage on the backend. The goal is to experience the complete fullstack loop: render, fetch, mutate, re-render.',
+      'You have worked through all five fullstack lessons. Now connect the two halves: build a React frontend that talks to an Express backend over real HTTP. No database — use in-memory storage on the backend. The goal is to experience the complete fullstack loop: render, fetch, mutate, re-render. A starter skeleton with the backend routes and frontend components stubbed out is available at https://github.com/oliverhuangcode/mac-fullstack-starters — start with the backend, test each route in Hoppscotch, then wire up the frontend.',
     requirements: [
       'Express API with three endpoints: GET /api/notes (list all), POST /api/notes (create), DELETE /api/notes/:id (remove)',
       'CORS configured so the React frontend can reach the Express server',
@@ -49,6 +50,7 @@ export const tickets: Ticket[] = [
     definitionOfDone:
       'You can add, view, and delete notes. Every action makes a real HTTP request to your Express backend — verified in the Network tab of DevTools. Refreshing the page shows the current server state.',
     difficulty: 'intermediate',
+    afterStage: 5,
   },
 
   // ─── Backend track ───────────────────────────────────────────────────────

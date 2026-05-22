@@ -22,6 +22,13 @@ export default async function TrackPage({ params }: TrackPageProps) {
     .map(id => lessons.find(l => l.id === id))
     .filter((l): l is NonNullable<typeof l> => l !== undefined)
 
+  const trackTickets = track.tickets
+    .map(id => tickets.find(t => t.id === id))
+    .filter((t): t is NonNullable<typeof t> => t !== undefined)
+
+  const inlineTickets = trackTickets.filter(t => t.afterStage !== undefined)
+  const bottomTickets = trackTickets.filter(t => t.afterStage === undefined)
+
   return (
     <div className="mx-auto max-w-5xl px-4 sm:px-6 py-12">
       <div className="mb-8">
@@ -32,18 +39,16 @@ export default async function TrackPage({ params }: TrackPageProps) {
 
       <section className="mb-12">
         <h2 className="text-xl font-semibold text-primary mb-4">Lessons</h2>
-        <LessonList lessons={trackLessons} />
+        <LessonList lessons={trackLessons} interleaveTickets={inlineTickets} />
       </section>
 
-      {track.tickets.length > 0 && (
+      {bottomTickets.length > 0 && (
         <section className="mb-12">
           <h2 className="text-xl font-semibold text-primary mb-4">Tickets</h2>
           <div className="space-y-3">
-            {track.tickets.map(ticketId => {
-              const ticket = tickets.find(t => t.id === ticketId)
-              if (!ticket) return null
-              return <TicketCard key={ticketId} ticket={ticket} />
-            })}
+            {bottomTickets.map(ticket => (
+              <TicketCard key={ticket.id} ticket={ticket} />
+            ))}
           </div>
         </section>
       )}

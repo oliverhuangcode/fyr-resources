@@ -1,15 +1,17 @@
 'use client'
 
-import type { Lesson } from '@/types'
+import type { Lesson, Ticket } from '@/types'
 import { useProgress } from '@/hooks/useProgress'
 import { ProgressBar } from '@/components/ProgressBar'
 import { LessonCard } from '@/components/LessonCard'
+import { TicketCard } from '@/components/TicketCard'
 
 interface LessonListProps {
   lessons: Lesson[]
+  interleaveTickets?: Ticket[]
 }
 
-export function LessonList({ lessons }: LessonListProps) {
+export function LessonList({ lessons, interleaveTickets = [] }: LessonListProps) {
   const { isLessonCompleted, hydrated } = useProgress()
 
   const completedCount = lessons.filter(l => isLessonCompleted(l.id)).length
@@ -33,13 +35,22 @@ export function LessonList({ lessons }: LessonListProps) {
         <ProgressBar completed={completedCount} total={lessons.length} />
       </div>
       <div className="space-y-3">
-        {lessons.map(lesson => (
-          <LessonCard
-            key={lesson.id}
-            lesson={lesson}
-            isCompleted={isLessonCompleted(lesson.id)}
-          />
-        ))}
+        {lessons.map(lesson => {
+          const afterThisStage = interleaveTickets.filter(t => t.afterStage === lesson.stage)
+          return (
+            <div key={lesson.id}>
+              <LessonCard
+                lesson={lesson}
+                isCompleted={isLessonCompleted(lesson.id)}
+              />
+              {afterThisStage.map(ticket => (
+                <div key={ticket.id} className="mt-3">
+                  <TicketCard ticket={ticket} />
+                </div>
+              ))}
+            </div>
+          )
+        })}
       </div>
     </div>
   )

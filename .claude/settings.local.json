@@ -13,7 +13,13 @@
       "mcp__plugin_everything-claude-code_exa__web_search_exa",
       "Bash(grep -n '`' /Users/oliver/repos/fyr-resources/data/lessons.ts)",
       "Bash(grep -v \"^.*body: \\\\`\")",
-      "Bash(grep -n \"// re-run whenever\\\\|whenever \\\\`\\\\|// re-run\" /Users/oliver/repos/fyr-resources/data/lessons.ts)"
+      "Bash(grep -n \"// re-run whenever\\\\|whenever \\\\`\\\\|// re-run\" /Users/oliver/repos/fyr-resources/data/lessons.ts)",
+      "Bash(mkdir -p /Users/oliver/repos/mac-fullstack-starters/ticket-01-task-list/src/components)",
+      "Bash(mkdir -p /Users/oliver/repos/mac-fullstack-starters/ticket-02-notes-app/backend)",
+      "Bash(mkdir -p /Users/oliver/repos/mac-fullstack-starters/ticket-02-notes-app/frontend/src/components)",
+      "Bash(gh repo *)",
+      "Bash(gh auth *)",
+      "Bash(git remote *)"
     ]
   }
 }

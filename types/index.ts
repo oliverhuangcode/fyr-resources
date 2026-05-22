@@ -62,4 +62,5 @@ export interface Ticket {
   stretchGoals: string[]
   definitionOfDone: string
   difficulty: 'starter' | 'intermediate' | 'advanced'
+  afterStage?: number
 }
